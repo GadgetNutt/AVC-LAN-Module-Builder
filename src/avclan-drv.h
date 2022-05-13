@@ -3,6 +3,8 @@
   Created by Greg Nutt, 012.07.2020
   with some code derived from AVCLanDrv.h created by Kochetkov Aleksey, 04.08.2010
   Version 0.0.1
+  
+  Not for commercial use.  
 */
 
 #include "avclan-messages.h"
