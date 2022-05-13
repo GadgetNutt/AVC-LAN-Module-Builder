@@ -1,7 +1,9 @@
 /*
-avclan-i2c.cpp - AVCLan I2C library for avclan interface for Atmega328
-Created by Greg Nutt 2021-12-18
-Version 0.0.1
+  avclan-i2c.cpp - AVCLan I2C library for avclan interface for Atmega328
+  Created by Greg Nutt 2021-12-18
+  Version 0.0.1
+
+  Not for commercial use.
 */
 
 #include "avclan-i2c.h"
