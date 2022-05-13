@@ -2,6 +2,8 @@
   avclan-registers.h - AVCLan Head Unit library for for Atmega328
   Created by Greg Nutt, 010.30.2020
   Version 0.0.1
+  
+  Not for commercial use.  
 */
 
 
