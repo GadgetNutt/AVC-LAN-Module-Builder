@@ -3,6 +3,8 @@
   Created by Greg Nutt 2020-12-07
   Derived from AVCLanDrv.cpp by Kochetkov Aleksey, 04.08.2010
   Version 0.0.1
+  
+  Not for commercial use.
 */
 
 #include "avclan-drv.h"
