@@ -2,6 +2,8 @@
   avclan-device.h - AVCLan Multi-display library for avclan interface for Atmega328
   Created by Greg Nutt 2020-12-15
   Version 0.0.1
+  
+  Not for commercial use.
 */
 #include "avclan-messages.h"
 #include "avclan-registers.h"
