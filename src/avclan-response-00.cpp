@@ -21,7 +21,7 @@ void avclan_response::respond00(avclan_frame_t* msg_frame) {
 
 	default:
 
-			break;
+		break;
 
 	}
 }
