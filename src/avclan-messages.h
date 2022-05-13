@@ -2,6 +2,8 @@
   avclan-messages.h - AVCLan Messages library for avclan interface for Atmega328
   Created by Greg Nutt 2020-12-26
   Version 0.0.1
+  
+  Not for commercial use.  
 */
 
 #pragma once
