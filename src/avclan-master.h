@@ -2,6 +2,8 @@
   avclan-master.h - AVCLan Master Device library for Atmega328
   Created by Greg Nutt 2020-12-04
   Version 0.0.1
+  
+  Not for commercial use.
 */
 
 #include <avr/pgmspace.h>
