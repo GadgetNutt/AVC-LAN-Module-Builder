@@ -2,7 +2,7 @@
 Firmware for ATMega to Emulate ANY AVC-LAN device
 
 Credit where due:
-Many people are the developers of the base code for this project learning how the AVC-LAN worked such as:
+A few people are the developers of the initial AVCLAN code for this project learning how the AVC-LAN worked such as:
 
 Marcin Slonicki    http://www.softservice.com.pl/corolla/avc/avclan.php
 Schematic Link     http://www.softservice.com.pl/corolla/avc/sch/sniffer2.png
