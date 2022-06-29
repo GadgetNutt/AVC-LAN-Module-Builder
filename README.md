@@ -20,4 +20,4 @@ https://www.youtube.com/watch?v=jLCiIB6z968
 
 This code is still being developed by me as of May 2022.  If you have anything you wish to contribute to this code, please by all means submit it for evalutation.  By submitting code to this project you certify that it is your own code and you surrender any claims to copyright to it.
 
-I have decided to make my code available for others to use non-commercially.  I do not know if my work infringes on copyrights.  If you have specific knowledge that it does or this is based on your code and causes an issue, please let me know.
+I have decided to make my code available for others to use non-commercially.  I do not know if my work infringes on copyrights.  If you have specific knowledge that it does or you are the original writer of the original AVCLAN driver code and this causes an issue, please let me know so we can discuss it.
