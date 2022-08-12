@@ -12,14 +12,21 @@
 #include "src/avclan-drv.h"
 #include "src/avclan-serial.h"
 #include "src/avclan-registers.h"
-#include "src/avclan-messages.h"
 
-#ifdef AVC_MASTER
+#if defined AVC_MASTER
 #include "src/avclan-master.h"
 #endif
 
+#ifdef AVC_DEVICE
 #include "src/avclan-device.h"
+#endif
+
+#if defined AVC_MASTER || defined AVC_DEVICE
+#include "src/avclan-messages.h"
+#endif
+
 #include "src/avclan-router.h"
+
 
 #define DEFAULT_MSG_DELAY 15
 //#define local_debug
@@ -54,7 +61,7 @@ void CheckForMessage() {
     avclan_frame_t msg_frame;
     if (INPUT_IS_SET) {
         RX_LED_ON;
-        byte res = avclan.readMessage(&msg_frame);
+        uint8_t res = avclan.readMessage(&msg_frame);
         RX_LED_OFF;
         if (!res) {
             last_message_time = millis();
@@ -67,7 +74,9 @@ void CheckForMessage() {
 #ifdef AVC_MASTER
                 master.processMessage(&msg_frame);
 #endif
+#ifdef AVC_DEVICE
                 device.processMessage(&msg_frame);
+#endif
                 break;
 
                 /*  If broadcast messages*/
@@ -82,10 +91,12 @@ void CheckForMessage() {
 
                 }
 #endif
+#ifdef AVC_DEVICE
                 device.processMessage(&msg_frame);
                 if (msg_frame.master != ADDR_ME) {
 
                 }
+#endif
                 break;
             }
         }
@@ -104,7 +115,7 @@ void CheckForMessage() {
     }
 }
 
-
+#ifdef AVC_MASTER
 void PingTimer() {
     //  Basic timer to send heart beat once every minute
     if (!time_started) {
@@ -119,6 +130,7 @@ void PingTimer() {
         }
     }
 }
+#endif
 
 void avclan_startup() {
     
@@ -145,7 +157,7 @@ void avclan_startup() {
     //master.ping_address(ADDR_BROADCAST_FFF);
     //CheckForMessage(DEFAULT_MSG_DELAY);
 
- 
+#ifdef AVC_MASTER
     master.lan_start(0x58);
     CheckForMessage(DEFAULT_MSG_DELAY);
 
@@ -153,6 +165,7 @@ void avclan_startup() {
     //  What is this?  It is seems to be sent with 'b 190 FFF 09 A401DB000000000000' following it.
     master.lan_start(0x46);
     CheckForMessage(DEFAULT_MSG_DELAY);
+ #endif
 
 }
 
@@ -186,9 +199,14 @@ void loop()
 #ifdef AVC_MASTER
     master.update();
 #endif
-   device.update();
+
+#ifdef AVC_DEVICE
+   device.update();    
+#endif
     
-    PingTimer();
+#ifdef AVC_MASTER
+   PingTimer();
+#endif
 
 
     if (avcSerial.available()) {
@@ -198,9 +216,11 @@ void loop()
         case 'R':
             resetFunc();                //call reset
             break;
+#ifdef AVC_MASTER
         case 'L':
             master.printAddress2DeviceList();
             break;
+#endif
         case 'S':	                   // start command
             readSeq = 1;
             s_len = 0;
@@ -245,9 +265,12 @@ void loop()
 
             if (readkey == 'Y') {
                 router.sendMessage(&msg_frame);
-            } else {
+            } 
+#ifdef AVC_MASTER
+            else {
                 master.processMessage(&msg_frame);
             }
+#endif
             break;
         default:
             if (readSeq == 1) {
