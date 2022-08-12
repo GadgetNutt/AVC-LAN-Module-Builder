@@ -3,13 +3,13 @@
   Created by Greg Nutt 2020-12-07
   Derived from AVCLanDrv.cpp by Kochetkov Aleksey, 04.08.2010
   Version 0.0.1
-  
-  Not for commercial use.
 */
 
 #include "avclan-drv.h"
 #include "avclan-serial.h"
+#ifdef AVC_I2C
 #include "avclan-i2c.h"
+#endif
 //#include <Arduino.h>						          
 #ifdef AVR
 #include <avr/pgmspace.h>
@@ -545,11 +545,12 @@ void avclan_drv::printMessage(avclan_frame_t* msg_frame, uint8_t incoming) {
 
 }
 
+#ifdef AVC_I2C
 void avclan_drv::sendMessageToI2C(avclan_frame_t* msg_frame) {
 
 	//  Send Master / Slave addresses
 	Wire.beginTransmission(0xD2);
-	byte address[5];
+	uint8_t address[5];
 	address[0] = msg_frame->master >> 8;
 	address[1] = msg_frame->master;
 	address[2] = msg_frame->slave >> 8;
@@ -560,5 +561,6 @@ void avclan_drv::sendMessageToI2C(avclan_frame_t* msg_frame) {
 	Wire.endTransmission();
 
 }
+#endif
 
 avclan_drv avclan;
