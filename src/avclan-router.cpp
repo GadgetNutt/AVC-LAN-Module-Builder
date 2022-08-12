@@ -19,6 +19,7 @@ void avclan_router::sendMessage(avclan_frame_t* msg_frame) {
 	}
 #endif
 
+#ifdef AVC_DEVICE
 	if (msg_frame->slave == ADDR_BROADCAST_1FF || msg_frame->slave == ADDR_BROADCAST_FFF || msg_frame->slave == ADDR_ME)
 		{
 #ifdef local_debug
@@ -27,6 +28,7 @@ void avclan_router::sendMessage(avclan_frame_t* msg_frame) {
 		device.processMessage(msg_frame);
 		processed = 1;
 	}
+#endif
 
 	//	IF a broadcast message or was not processed above, then we continue to send the message to the AVCLAN
 	if (!processed || msg_frame->slave == ADDR_BROADCAST_1FF || msg_frame->slave == ADDR_BROADCAST_FFF) {
