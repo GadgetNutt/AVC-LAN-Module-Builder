@@ -2,8 +2,6 @@
   config.h - AVCLan Head Unit library for for Atmega328
   Created by Greg Nutt 2020-12-04
   Version 0.0.1
-  
-  Not for commercial use.  
 */
 
 #include "avclan-registers.h"
@@ -17,10 +15,32 @@
 //#define STM32 - NOT IMPLEMENTED
 
 /* Define devices */
-#define AVC_MASTER
+/* ONLY define one of the following
+* 
+*	AVC_MASTER
+* 	AVC_DEVICE
+* 	AVC_SNIFFER	 
+*   
+*   Enabling AVC_MASTER will automatically also enable AVC_DEVICE
+*   Enabling AVC_SNIFFER will automatically disable AVC_MASTER and AVC_DEVICE
+*/
+//#define AVC_MASTER
+#define AVC_DEVICE
+//#define AVC_SNIFFER
+
+
+#ifdef AVC_MASTER
+#define AVC_DEVICE		// AVC_DEVICE MUST BE DEFINED IF AVC_MASTER IS DEFINED
+#endif
+#ifdef AVC_SNIFFER
+#undef AVC_MASTER
+#undef AVC_DEVICE
+#endif
+
+
 
 /* Define Connections*/
-#define AVC_I2C
+//#define AVC_I2C
 
 const uint16_t  ADDR_ME = ADDR_DISPLAY_MASTER;	//	See avclan-registers.h for list
 
