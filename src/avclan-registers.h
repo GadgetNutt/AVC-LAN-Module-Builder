@@ -2,8 +2,8 @@
   avclan-registers.h - AVCLan Head Unit library for for Atmega328
   Created by Greg Nutt, 010.30.2020
   Version 0.0.1
-  
-  Not for commercial use.  
+
+  Not for commercial use.
 */
 
 
@@ -13,6 +13,7 @@
 #define FRAME_MAXLEN			32;
 
 // Address Register Values
+const uint16_t ADDR_NAV_W_CONTROLS		=	0x0178;
 const uint16_t ADDR_AUDIO_ECU			=	0x0180;
 const uint16_t ADDR_AUDIO_HU			=	0x0190;
 const uint16_t ADDR_DVD_P				=	0x01A0;
@@ -74,82 +75,92 @@ const uint16_t ADDR_TEL_INFO			=	0x05C0;
 const uint16_t ADDR_MAYDAY				=	0x05C8;
 const uint16_t ADDR_AC_ECU				=	0x0600;
 const uint16_t ADDR_BODY_ECU			=	0x0680;
+const uint16_t ADDR_TURN_SIGNAL			=	0x0D19;
 const uint16_t ADDR_BROADCAST_FFF		=	0x0FFF;
 
 // Device Register Values
-const uint16_t DEV_COM_CTRL0			=	0x00;
-const uint16_t DEV_COM_CTRL				=	0x01;
-const uint16_t DEV_COM_EXT				=	0x02;
-const uint16_t DEV_COM_MASTER			=	0x11;
-const uint16_t DEV_SW_AUDIO				=	0x21;
-const uint16_t DEV_SW_SHIFT				=	0x23;
-const uint16_t DEV_SW					=	0x25;
-const uint16_t DEV_HU_BEEP				=	0x28;
-const uint16_t DEV_BEEP_SPEAK			=	0x29;
-const uint16_t DEV_INFO_DISPLAY1		=	0x31;
-const uint16_t DEV_INFO_DISPLAY2		=	0x32;
-const uint16_t DEV_INFO_DISPLAY3		=	0x34;
-const uint16_t DEV_3F					=	0x3F;
-const uint16_t DEV_TV_TUNER				=	0x40;
-const uint16_t DEV_CD					=	0x43;
-const uint16_t DEV_BLUETOOTH			=	0x55;
-const uint16_t DEV_INFO_DRAW			=	0x56;
-const uint16_t DEV_NAV_GPS				=	0x58;
-const uint16_t DEV_FM_MULTIPLEX_VICS	=	0x5A;
-const uint16_t DEV_BEACON				=	0x5B;
-const uint16_t DEV_CAMERA				=	0x5C;
-const uint16_t DEV_CLIMATE_CTRL_DRAW	=	0x5D;
-const uint16_t DEV_AUDIO_DRAW			=	0x5E;
-const uint16_t DEV_TRIP_INFO_DRAW		=	0x5F;
-const uint16_t DEV_RADIO				=	0x60;
-const uint16_t DEV_CASSETTE				=	0x61;
-const uint16_t DEV_CD_P					=	0x62;
-const uint16_t DEV_CD_CH				=	0x63;
-const uint16_t DEV_MD					=	0x64;
-const uint16_t DEV_MD_CH				=	0x65;
-const uint16_t DEV_6D					=	0x6D;
-const uint16_t DEV_6F					=	0x6F;
-const uint16_t DEV_AUDIO_AMP			=	0x74;
-const uint16_t DEV_NAV_GPS_2			=	0x80;
-const uint16_t DEV_81					=	0x81;
-const uint16_t DEV_FM_MULTIPLEX_DATA	=	0x82;
-const uint16_t DEV_OPTICAL_BEACON		=	0x83;
-const uint16_t DEV_RADIO_WAVE_BEACON	=	0x84;
-const uint16_t DEV_VOICE_CONTROL		=	0x85;
-const uint16_t DEV_FM_MULTIPLEX_TUNER	=	0x9A;
-const uint16_t DEV_A4					=	0xA4;
-const uint16_t DEV_XM_TUNER				=	0xC0;
-const uint16_t DEV_CLIMATE_CTRL_DEV		=	0xE0;
-const uint16_t DEV_E4					=	0xE4;
-const uint16_t DEV_TRIP_INFO			=	0xE5;
-const uint16_t DEV_EF					=	0xEF;
+const uint8_t DEV_COM_CTRL0			=	0x00;
+const uint8_t DEV_COM_CTRL				=	0x01;
+const uint8_t DEV_COM_EXT				=	0x02;
+const uint8_t DEV_CD_DEV10				=   0x10;
+const uint8_t DEV_COM_MASTER			=	0x11;
+const uint8_t DEV_SW_AUDIO				=	0x21;
+const uint8_t DEV_SW_SHIFT				=	0x23;
+const uint8_t DEV_SW					=	0x25;
+const uint8_t DEV_HU_BEEP				=	0x28;
+const uint8_t DEV_BEEP_SPEAK			=	0x29;
+const uint8_t DEV_INFO_DISPLAY1			=	0x31;
+const uint8_t DEV_INFO_DISPLAY2			=	0x32;
+const uint8_t DEV_INFO_DISPLAY3			=	0x34;
+const uint8_t DEV_3F					=	0x3F;
+const uint8_t DEV_TV_TUNER				=	0x40;
+const uint8_t DEV_CD					=	0x43;
+const uint8_t DEV_CD_50					=	0x50;
+const uint8_t DEV_CD_52					=	0x52;
+const uint8_t DEV_BLUETOOTH				=	0x55;
+const uint8_t DEV_INFO_DRAW				=	0x56;
+const uint8_t DEV_NAV_GPS				=	0x58;
+const uint8_t DEV_FM_MULTIPLEX_VICS		=	0x5A;
+const uint8_t DEV_BEACON				=	0x5B;
+const uint8_t DEV_CAMERA				=	0x5C;
+const uint8_t DEV_CLIMATE_CTRL_DRAW		=	0x5D;
+const uint8_t DEV_AUDIO_DRAW			=	0x5E;
+const uint8_t DEV_TRIP_INFO_DRAW		=	0x5F;
+const uint8_t DEV_RADIO					=	0x60;
+const uint8_t DEV_CASSETTE				=	0x61;
+const uint8_t DEV_CD_P					=	0x62;
+const uint8_t DEV_CD_CH					=	0x63;
+const uint8_t DEV_MD					=	0x64;
+const uint8_t DEV_MD_CH					=	0x65;
+const uint8_t DEV_6D					=	0x6D;
+const uint8_t DEV_6F					=	0x6F;
+const uint8_t DEV_AUDIO_AMP				=	0x74;
+const uint8_t DEV_NAV_GPS_2				=	0x80;
+const uint8_t DEV_81					=	0x81;
+const uint8_t DEV_FM_MULTIPLEX_DATA		=	0x82;
+const uint8_t DEV_OPTICAL_BEACON		=	0x83;
+const uint8_t DEV_RADIO_WAVE_BEACON		=	0x84;
+const uint8_t DEV_VOICE_CONTROL			=	0x85;
+const uint8_t DEV_FM_MULTIPLEX_TUNER	=	0x9A;
+const uint8_t DEV_A4					=	0xA4;
+const uint8_t DEV_XM_TUNER				=	0xC0;
+const uint8_t DEV_CLIMATE_CTRL_DEV		=	0xE0;
+const uint8_t DEV_E1  					=   0xE1;
+const uint8_t DEV_E2					=   0xE2;
+const uint8_t DEV_E3					=   0xE3;
+const uint8_t DEV_E4					=	0xE4;
+const uint8_t DEV_TRIP_INFO				=	0xE5;
+const uint8_t DEV_EF					=	0xEF;
 
 // Function Register Values
-const uint16_t FUNC_DIRECT_COMMAND		=	0x00;
-const uint16_t FUNC_LAN_INIT			=	0x01;
-const uint16_t MSG_DEVICES_RESPONSE		=	0x02;
-const uint16_t MSG_DEVICES_REGISTER		=	0x10;
-const uint16_t FUNC_REGISTER			=	0x11;		//  TODO:  Confirm
-const uint16_t MSG_DEVICES_REQUEST		=	0x12;
-const uint16_t MSG_DEVICES_BROADCAST	=	0x13;
-const uint16_t PING						=	0x20;
-const uint16_t PONG						=	0x30;
-const uint16_t FUNC_REGISTER_58			=	0x58;
-const uint16_t FUNC_REGISTER_5B			=	0x5B;
-const uint16_t FUNC_REGISTER_5F			=	0x5F;
-const uint16_t FUNC_STATUS_B7			=	0xB7;
-const uint16_t FUNC_UNKNOWN_INFO_D9		=	0xD9;		// TODO: Related to Info Display, try to identify
-const uint16_t FUNC_AVG_KMH_INFO		=	0xDB;
-const uint16_t FUNC_UNKNOWN_INFO_DC		=	0xDC;
-const uint16_t FUNC_FUEL_RANGE_INFO		=	0xDD;
-const uint16_t FUNC_TRIP_TIME_INFO		=	0xDE;
-const uint16_t FUNC_STATUS_REQUEST_E0	=	0xE0;
-const uint16_t FUNC_STATUS_REQUEST_E2	=	0xE2;
-const uint16_t FUNC_STATUS_REQUEST_E4	=	0xE4;
-const uint16_t FUNC_STATUS_RESPOND_F0	=	0xF0;
-const uint16_t FUNC_STATUS_RESPOND_F1	=	0xF1;
-const uint16_t FUNC_STATUS_RESPOND_F2	=	0xF2;
-const uint16_t FUNC_STATUS_RESPOND_F3	=	0xF3;
-const uint16_t FUNC_STATUS_RESPOND_F9	=	0xF9;
+const uint8_t FUNC_DIRECT_COMMAND		=	0x00;
+const uint8_t FUNC_LAN_INIT				=	0x01;
+const uint8_t MSG_DEVICES_RESPONSE		=	0x02;
+const uint8_t MSG_DEVICES_REGISTER		=	0x10;
+const uint8_t FUNC_REGISTER				=	0x11;		//  TODO:  Confirm
+const uint8_t MSG_DEVICES_REQUEST		=	0x12;
+const uint8_t MSG_DEVICES_BROADCAST		=	0x13;
+const uint8_t PING						=	0x20;
+const uint8_t PONG						=	0x30;
+const uint8_t CONTROL1					=   0x45;		// Is this the device announcing itself as the master?
+const uint8_t CONTROL2					=   0x46;		// This seems to be device announcing one of its logical devices?
+const uint8_t FUNC_REGISTER_58			=	0x58;
+const uint8_t FUNC_REGISTER_5B			=	0x5B;
+const uint8_t FUNC_REGISTER_5F			=	0x5F;
+const uint8_t FUNC_STATUS_B7			=	0xB7;
+const uint8_t FUNC_UNKNOWN_INFO_D9		=	0xD9;		// TODO: Related to Info Display, try to identify
+const uint8_t FUNC_AVG_KMH_INFO			=	0xDB;
+const uint8_t FUNC_UNKNOWN_INFO_DC		=	0xDC;
+const uint8_t FUNC_FUEL_RANGE_INFO		=	0xDD;
+const uint8_t FUNC_TRIP_TIME_INFO		=	0xDE;
+const uint8_t FUNC_STATUS_REQUEST_E0	=	0xE0;
+const uint8_t FUNC_STATUS_REQUEST_E2	=	0xE2;
+const uint8_t FUNC_STATUS_REQUEST_E4	=	0xE4;
+const uint8_t FUNC_STATUS_RESPOND_F0	=	0xF0;
+const uint8_t FUNC_STATUS_RESPOND_F1	=	0xF1;
+const uint8_t FUNC_STATUS_RESPOND_F2	=	0xF2;
+const uint8_t FUNC_STATUS_RESPOND_F3	=	0xF3;
+const uint8_t FUNC_STATUS_RESPOND_F9	=	0xF9;
+
 
 #endif

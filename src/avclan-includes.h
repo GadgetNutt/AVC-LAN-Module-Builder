@@ -10,6 +10,8 @@
 #ifdef AVC_MASTER
 #include "avclan-master.h"
 #endif
+#ifdef AVC_DEVICE
 #include "avclan-device.h"
+#endif
 
 #endif

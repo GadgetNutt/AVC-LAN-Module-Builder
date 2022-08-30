@@ -1,7 +1,9 @@
 /*
   avclan-device.cpp - AVCLan Serial library for avclan interface for Atmega328
   Created by Greg Nutt 2020-12-15
-  Version 0.0.2
+  Version 0.0.1
+
+  Not for commercial use.
 */
 
 #include <stdio.h>
@@ -35,6 +37,92 @@ void avclan_device::update() {
 	}
 }
 
+// TODO:	Intended to replace older version:
+//			void avclan_device::processMessage(avclan_frame_t *msg_frame)
+void avclan_device::processMessage(avclan_frame_t* msg_frame, bool bitswitch)
+{
+	//avclan_message_command_bit
+	uint8_t devices[20];
+	uint8_t src_dev = messages.getSrcDevice(msg_frame);
+	uint8_t dest_dev = messages.getDestDevice(msg_frame);	// TODO: start by device, then by function?
+	uint8_t message_function = messages.getFunction(msg_frame);
+#ifdef local_debug
+	avcSerial.print("Device bit processing message function: ");// Enable for debug if necessary
+	avcSerial.printHex8(message_function);
+	avcSerial.print(" from :");
+	avcSerial.printHex8(msg_frame->master >> 8);
+	avcSerial.printHex8(msg_frame->master);
+	avcSerial.print(" dest device: ");
+	avcSerial.printHex8(dest_dev);
+	avcSerial.println();
+#endif
+
+	if ((message_function && CMD_BIT_STATUS))
+	{
+
+	}else{
+
+		if ((message_function && CMD_BIT_MASTER))
+		{
+			//  TODO:  Message came from AVCLAN master device.  Get master address while we are at it
+		}
+		if ((message_function && CMD_BIT_PING))
+		{
+			if (message_function && CMD_BIT_REGISTER)
+			{
+			}  
+			else
+			{
+				/*  Received Ping from network device
+					Respond to ping with cmd30
+				*/
+				respond.respond20(msg_frame);
+#ifdef AVC_MASTER
+				checkForPassthrough(dest_dev, msg_frame);
+#endif
+			}
+		}
+		if (message_function && CMD_BIT_REGISTER)
+		{
+		}
+		else
+		{
+			if (message_function && CMD_BIT_INIT)
+			{
+				/*  Logical device lists received by master.
+					Time to send the logical device list I want to listen to
+				*/
+				respond.respond01(msg_frame);
+			}
+			else
+			{
+				//  AVCLAN Init
+				respond.respond00(msg_frame);
+			}
+
+			if (message_function && CMD_BIT_DEVICE)
+			{
+				/*  My device assignments from the master network device
+					Master device's response to my cmd12
+					Map assigned network devices to logical devices I'm listening for
+				*/
+				respond.respond02(msg_frame);
+			}
+
+			if ((message_function && CMD_BIT_INIT) && (message_function && CMD_BIT_DEVICE))
+			{
+				/*  Response to my cmd13, master device identifying itself.
+					Save to my master_device class variable
+				*/
+				respond.respond03(msg_frame);
+			}
+		}
+	}
+
+}
+
+//  TODO:   Soon to be deprecated... being replaced by: 
+//			void avclan_device::processMessage(avclan_frame_t* msg_frame, bool bitswitch)
 void avclan_device::processMessage(avclan_frame_t *msg_frame)
 {
 	uint8_t devices[20];

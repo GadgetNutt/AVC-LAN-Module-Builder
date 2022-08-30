@@ -2,8 +2,8 @@
   avclan-messages.h - AVCLan Messages library for avclan interface for Atmega328
   Created by Greg Nutt 2020-12-26
   Version 0.0.1
-  
-  Not for commercial use.  
+
+  Not for commercial use.
 */
 
 #pragma once
@@ -13,22 +13,18 @@
 #ifndef avclan_messages_h
 #define avclan_messages_h
 
-typedef enum
-{   // Broadcast = 0
-	AVCLAN_DIRECT_MSG = 0x1,
-	AVCLAN_BROADCAST_MSG = 0x0
-} avclan_message_mode;
+	const uint8_t	AVCLAN_DIRECT_MSG = 0x1;
+	const uint8_t	AVCLAN_BROADCAST_MSG = 0x0;
 
-typedef enum avclan_message_types
-{
-	MSG_PING_SEND,
-	MSG_PING_RECV,
-	MSG_DEV_RESET,
-	MSG_LAN_RESET,
-	MSG_DEV_REG_DIRECT,
-	MSG_DEV_REG_BROADCAST,
-	MSG_DEV_
-};
+	// Bit Commands
+	const uint8_t	CMD_BIT_INIT		= 0x01;			//	0 0 0 0 0 0 0 1
+	const uint8_t	CMD_BIT_DEVICE		= 0x02;			//	0 0 0 0 0 0 1 0
+	const uint8_t	CMD_BIT_BIT3		= 0x04;			//	0 0 0 0 0 1 0 0
+	const uint8_t	CMD_BIT_BIT4		= 0x08;			//	0 0 0 0 1 0 0 0
+	const uint8_t	CMD_BIT_REGISTER	= 0x10;			//	0 0 0 1 0 0 0 0
+	const uint8_t	CMD_BIT_PING		= 0x20;			//	0 0 1 0 0 0 0 0
+	const uint8_t	CMD_BIT_MASTER		= 0x40;			//	0 1 0 0 0 0 0 0
+	const uint8_t	CMD_BIT_STATUS		= 0x80;			//	1 0 0 0 0 0 0 0
 
 typedef struct {
 	uint16_t network_device;

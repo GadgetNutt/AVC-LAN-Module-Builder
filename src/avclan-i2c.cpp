@@ -1,9 +1,9 @@
 /*
-  avclan-i2c.cpp - AVCLan I2C library for avclan interface for Atmega328
-  Created by Greg Nutt 2021-12-18
-  Version 0.0.1
+avclan-i2c.cpp - AVCLan I2C library for avclan interface for Atmega328
+Created by Greg Nutt 2021-12-18
+Version 0.0.1
 
-  Not for commercial use.
+Not for commercial use.
 */
 
 #include "avclan-i2c.h"
@@ -78,7 +78,7 @@ uint8_t avclan_i2c::read(void) {
 void avclan_i2c::printHex8(uint8_t* data, uint8_t length) // prints 8-bit data in hex
 {
 	char tmp[length * 2 + 1];
-	byte first;
+	uint8_t first;
 	int j = 0;
 	for (uint8_t i = 0; i < length; i++)
 	{

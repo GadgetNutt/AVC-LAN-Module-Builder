@@ -2,6 +2,8 @@
   config.h - AVCLan Head Unit library for for Atmega328
   Created by Greg Nutt 2020-12-04
   Version 0.0.1
+
+  Not for commercial use.
 */
 
 #include "avclan-registers.h"
@@ -135,4 +137,7 @@ const uint16_t  ADDR_ME = ADDR_DISPLAY_MASTER;	//	See avclan-registers.h for lis
 #define AVC_MAXMSGLEN		32
 #define AVC_CONTROL_FLAGS	0xF
 
+
+
 #endif
+

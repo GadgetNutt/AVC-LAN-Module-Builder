@@ -2,8 +2,8 @@
   avclan-messages.cpp - AVCLAN base messages library
   Created by Greg Nutt 2021-04-04
   Version 0.0.1
-  
-  Not for commercial use.  
+
+  Not for commercial use.
 */
 
 #include "avclan-messages.h"
