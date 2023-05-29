@@ -10,6 +10,8 @@ Not for commercial use.
 */
 
 #include "avclan-includes.h"
+#ifdef AVC_DEVICE
+
 avclan_response respond;
 
 //	Network device advertising its own logical devices
@@ -25,3 +27,4 @@ void avclan_response::respond00(avclan_frame_t* msg_frame) {
 
 	}
 }
+#endif
