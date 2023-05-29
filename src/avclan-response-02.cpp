@@ -10,6 +10,7 @@ Not for commercial use.
 */
 
 #include "avclan-responses.h"
+#ifdef AVC_DEVICE
 
 
 void avclan_response::respond02(avclan_frame_t* msg_frame) {
@@ -45,3 +46,5 @@ void avclan_response::respond02(avclan_frame_t* msg_frame) {
 	}
 
 }
+
+#endif
