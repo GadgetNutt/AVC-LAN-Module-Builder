@@ -53,7 +53,7 @@
 
 const uint16_t  ADDR_ME = ADDR_DISPLAY_MASTER;	//	See avclan-registers.h for list
 
-#define MAXSENDATTEMP	3
+#define MAXSENDATTEMPT	3
 
 // define out pin (pin 6 arduino) for AVCLAN_RESISTOR
 #define DATAOUT_DDR		DDRD

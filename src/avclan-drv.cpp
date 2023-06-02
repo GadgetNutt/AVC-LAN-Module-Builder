@@ -460,7 +460,7 @@ uint8_t avclan_drv::_sendMessage(avclan_frame_t *msg_frame) {
 // sends the message in global registers on the AVC LAN bus, log message through serial port
 // return 0 if successful else error code
 uint8_t avclan_drv::sendMessage(avclan_frame_t* msg_frame, bool print) {
-	uint8_t sc = MAXSENDATTEMP;
+	uint8_t sc = MAXSENDATTEMPT;
 	uint8_t res;
 
 	do {
