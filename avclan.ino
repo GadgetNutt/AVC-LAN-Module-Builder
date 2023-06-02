@@ -1,5 +1,3 @@
-// Visual Micro is in vMicro>General>Tutorial Mode
-// 
 /*
     Name:       avclan.ino
     Created:	20-12-04 8:46:15 PM
@@ -164,7 +162,7 @@ void avclan_startup() {
 }
 
 void setup() {
-    avcSerial.begin(57600);
+    avcSerial.begin(115200);
     avcSerial.println("Start!");
 
     delay(3000);

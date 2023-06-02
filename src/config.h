@@ -16,8 +16,8 @@
 
 /*  Only define one of the following: */
 //#define AVC_MASTER
-#define AVC_DEVICE
-//#define AVC_SNIFFER
+//#define AVC_DEVICE
+#define AVC_SNIFFER
 
 #ifdef AVC_MASTER
 #define AVC_DEVICE // Enabling AVC_MASTER automatically enables AVC_DEVICE
