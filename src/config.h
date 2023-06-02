@@ -74,7 +74,7 @@ const uint16_t  ADDR_ME = ADDR_DISPLAY_MASTER;	// See avclan-registers.h for lis
 * 2 -	14.7456 MHz
 * 3 -	16 MHz
 */
-#define CRYSTAL		2
+#define CRYSTAL		3
 
 /* Crystal timing specifications
 *
