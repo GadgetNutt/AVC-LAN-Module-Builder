@@ -6,8 +6,6 @@
     Author:     Greg Nutt
 */
 
-#include <Wire.h>
-#include <Servo.h>
 #include "src/config.h"
 #include "src/avclan-drv.h"
 #include "src/avclan-serial.h"
@@ -19,16 +17,11 @@
 
 #ifdef AVC_DEVICE
 #include "src/avclan-device.h"
-#endif
-
-#if defined AVC_MASTER || defined AVC_DEVICE
 #include "src/avclan-messages.h"
 #endif
 
 #include "src/avclan-router.h"
 
-
-#define DEFAULT_MSG_DELAY 15
 //#define local_debug
 
 uint8_t readSeq = 0;
@@ -66,7 +59,7 @@ void CheckForMessage() {
         if (!res) {
             last_message_time = millis();
             switch (msg_frame.slave) {
-                /*  If messages sent to HU master  */
+#ifndef AVC_SNIFFER
             case ADDR_ME:        //  Define global_master in config.h              
 #ifdef local_debug
                 avcSerial.println("Received message for ADDR_ME");
@@ -78,6 +71,7 @@ void CheckForMessage() {
                 device.processMessage(&msg_frame);
 #endif
                 break;
+#endif
 
                 /*  If broadcast messages*/
             case ADDR_BROADCAST_1FF:
@@ -320,8 +314,5 @@ ISR(TIMER1_OVF_vect) {
 
     /*  Trigger broadcast of timed interval status request messages for all devices
     */
-
-#ifdef AVC_MASTER
-#endif
 
 }
