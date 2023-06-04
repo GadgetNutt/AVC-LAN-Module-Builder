@@ -128,7 +128,7 @@ void avclan_startup() {
     
     //  AVC-LAN Start up
 #ifdef AVC_MASTER
-    //delay(3000);
+    delay(3000);
     master.lan_start(0x00);                     // Master inviting devices to advertise their logical ID's
     CheckForMessage(1000);
     master.lan_start(0x00);                     // Master inviting devices to advertise their logical ID's

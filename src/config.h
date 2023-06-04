@@ -29,7 +29,7 @@
 
 
 #include "avclan-registers.h"
-const uint16_t  ADDR_ME = 0x110;	// See avclan-registers.h for list
+const uint16_t  ADDR_ME = 0x01D2;	// See avclan-registers.h for list
 
 
 /* Protocol configuration */
@@ -44,13 +44,13 @@ const uint16_t  ADDR_ME = 0x110;	// See avclan-registers.h for list
 
 /* Hardware configuration section */
 
-// DATAOUT (TX+) connected to Pin 6 of PORTD (i.e. Arduino terminal D6)
+// DATAOUT (TX+) connected to Pin 7 of PORTD (i.e. Arduino terminal D6)
 #define DATAOUT			7
 #define DATAOUT_DDR		DDRD
 #define DATAOUT_PORT	PORTD
 #define	DATAOUT_PIN		PIND
 
-// DATAIN (TX-) connected to Pin 7 of PORTD (i.e. Arduino terminal D7)
+// DATAIN (TX-) connected to Pin 6 of PORTD (i.e. Arduino terminal D7)
 #define DATAIN			6
 #define DATAIN_DDR		DDRD
 #define DATAIN_PORT		PORTD
