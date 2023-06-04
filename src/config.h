@@ -45,13 +45,13 @@ const uint16_t  ADDR_ME = ADDR_DISPLAY_MASTER;	// See avclan-registers.h for lis
 /* Hardware configuration section */
 
 // DATAOUT (TX+) connected to Pin 6 of PORTD (i.e. Arduino terminal D6)
-#define DATAOUT			6
+#define DATAOUT			7
 #define DATAOUT_DDR		DDRD
 #define DATAOUT_PORT	PORTD
 #define	DATAOUT_PIN		PIND
 
 // DATAIN (TX-) connected to Pin 7 of PORTD (i.e. Arduino terminal D7)
-#define DATAIN			7
+#define DATAIN			6
 #define DATAIN_DDR		DDRD
 #define DATAIN_PORT		PORTD
 #define	DATAIN_PIN		PIND
