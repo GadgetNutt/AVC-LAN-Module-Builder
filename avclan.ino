@@ -128,7 +128,7 @@ void avclan_startup() {
     
     //  AVC-LAN Start up
 #ifdef AVC_MASTER
-    delay(3000);
+    //delay(3000);
     master.lan_start(0x00);                     // Master inviting devices to advertise their logical ID's
     CheckForMessage(1000);
     master.lan_start(0x00);                     // Master inviting devices to advertise their logical ID's
@@ -162,8 +162,42 @@ void avclan_startup() {
 }
 
 void setup() {
-    avcSerial.begin(115200);
-    avcSerial.println("Start!");
+    avcSerial.begin( 115200 );
+    avcSerial.println( "AVC-Lan Start" );
+#if defined AVC_MASTER
+    avcSerial.println( "Mode: MASTER");
+#elif defined AVC_DEVICE
+    avcSerial.println( "Mode: DEVICE");
+#elif defined AVC_SNIFFER
+    avcSerial.println( "Mode: SNIFFER");
+#endif
+#if ( CRYSTAL == 3 )
+    avcSerial.print( "Crystal spec: ");
+    avcSerial.println( "16MHz");
+#elif ( CRYSTAL == 1 )
+    avcSerial.print( "Crystal spec: ");
+    avcSerial.println( "8MHz");
+#endif
+    avcSerial.print( "TX+ : ");
+    avcSerial.printDec( DATAOUT );
+    avcSerial.println();
+    avcSerial.print( "TX- : ");
+    avcSerial.printDec( DATAIN );
+    avcSerial.println();
+    avcSerial.print( "AVC_NORMAL_BIT_LENGTH: " );           avcSerial.printDec( AVC_NORMAL_BIT_LENGTH );
+    avcSerial.println();
+    avcSerial.print( "AVC_BIT_1_HOLD_ON_LENGTH: " );        avcSerial.printDec( AVC_BIT_1_HOLD_ON_LENGTH );
+    avcSerial.println();
+    avcSerial.print( "AVC_BIT_0_HOLD_ON_LENGTH: " );        avcSerial.printDec( AVC_BIT_0_HOLD_ON_LENGTH );
+    avcSerial.println();
+    avcSerial.print( "AVC_BIT_0_HOLD_ON_MIN_LENGTH: " );    avcSerial.printDec( AVC_BIT_0_HOLD_ON_MIN_LENGTH );
+    avcSerial.println();
+    avcSerial.print( "AVC_START_BIT_HOLD_ON_LENGTH: " );    avcSerial.printDec( AVC_START_BIT_HOLD_ON_LENGTH );
+    avcSerial.println();
+    avcSerial.print( "AVC_START_BIT_HOLD_ON_MIN_LENGTH: " );avcSerial.printDec( AVC_START_BIT_HOLD_ON_MIN_LENGTH );
+    avcSerial.println();
+    avcSerial.print( "AVC_1U_LENGTH: " );                   avcSerial.printDec( AVC_1U_LENGTH );
+    avcSerial.println();
 
     delay(3000);
     // Setup LED

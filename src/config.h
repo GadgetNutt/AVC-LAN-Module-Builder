@@ -29,7 +29,7 @@
 
 
 #include "avclan-registers.h"
-const uint16_t  ADDR_ME = ADDR_DISPLAY_MASTER;	// See avclan-registers.h for list
+const uint16_t  ADDR_ME = 0x110;	// See avclan-registers.h for list
 
 
 /* Protocol configuration */
