@@ -25,6 +25,7 @@ public:
 	void		printHex4(uint8_t);
 	void		printHex8(uint8_t);
 	void		printHex8(uint8_t* data, uint8_t length);	 // prints 8-bit data in hex
+	void		printHex16(uint16_t);
 	void		printDec(uint8_t);
 	bool		available(void);
 	uint8_t		read(void);

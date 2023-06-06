@@ -178,11 +178,14 @@ void setup() {
     avcSerial.print( "Crystal spec: ");
     avcSerial.println( "8MHz");
 #endif
-    avcSerial.print( "TX+ : ");
+    avcSerial.print( "DATAOUT / TX- : ");
     avcSerial.printDec( DATAOUT );
     avcSerial.println();
-    avcSerial.print( "TX- : ");
+    avcSerial.print( "DATAIN / TX+ : ");
     avcSerial.printDec( DATAIN );
+    avcSerial.println();
+    avcSerial.print( "Arduino address : ");
+    avcSerial.printHex16( ADDR_ME );
     avcSerial.println();
     avcSerial.print( "AVC_NORMAL_BIT_LENGTH: " );           avcSerial.printDec( AVC_NORMAL_BIT_LENGTH );
     avcSerial.println();
