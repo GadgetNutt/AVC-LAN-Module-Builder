@@ -170,6 +170,8 @@ void setup() {
     avcSerial.println( "Mode: DEVICE");
 #elif defined AVC_SNIFFER
     avcSerial.println( "Mode: SNIFFER");
+#else
+    avcSerial.println( "Mode: unknown...");
 #endif
 #if ( CRYSTAL == 3 )
     avcSerial.print( "Crystal spec: ");
