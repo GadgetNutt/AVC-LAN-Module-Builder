@@ -16,7 +16,7 @@
 
 /*  Only define one of the following: */
 //#define AVC_MASTER
-//#define AVC_DEVICE
+#define AVC_DEVICE
 //#define AVC_SNIFFER
 
 #ifdef AVC_MASTER

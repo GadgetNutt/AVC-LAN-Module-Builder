@@ -172,6 +172,8 @@ void setup() {
     avcSerial.println( "Mode: SNIFFER");
 #else
     avcSerial.println( "Mode: unknown...");
+    avcSerial.println( "Error: mode not set. Check configuration." );
+    exit( 0 );
 #endif
 #if ( CRYSTAL == 3 )
     avcSerial.print( "Crystal spec: ");
@@ -179,6 +181,9 @@ void setup() {
 #elif ( CRYSTAL == 1 )
     avcSerial.print( "Crystal spec: ");
     avcSerial.println( "8MHz");
+#else
+    avcSerial.println( "Error: crystal specification not set. Check configuration." );
+    exit( 0 );
 #endif
     avcSerial.print( "DATAOUT / TX- : ");
     avcSerial.printDec( DATAOUT );
