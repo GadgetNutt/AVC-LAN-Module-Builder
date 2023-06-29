@@ -6,7 +6,6 @@
   Not for commercial use.
 */
 
-//#include "../AVCLanDrv/AVCLanDrv.h"
 #include "avclan-master.h"
 #include "avclan-device.h"
 #include "avclan-router.h"
@@ -30,7 +29,6 @@ extern int                  device2addressCount = 0;
 extern passthroughdevices  pass_devices[10];
 extern int                  pass_device_count = 0;
 uint8_t ping_count;
-#define DEFAULT_MSG_DELAY 15
 
 
 // AVCLan Head Unit  & timer1 init, 

@@ -14,6 +14,7 @@
 #endif
 
 #include "avclan-includes.h"
+#include "avclan-device.h"
 #include "avclan-drv.h"
 #include "avclan-router.h"
 #include "avclan-serial.h"

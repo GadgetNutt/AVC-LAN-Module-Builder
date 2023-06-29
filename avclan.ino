@@ -1,13 +1,9 @@
-// Visual Micro is in vMicro>General>Tutorial Mode
-// 
 /*
     Name:       avclan.ino
     Created:	20-12-04 8:46:15 PM
     Author:     Greg Nutt
 */
 
-#include <Wire.h>
-#include <Servo.h>
 #include "src/config.h"
 #include "src/avclan-drv.h"
 #include "src/avclan-serial.h"
@@ -19,16 +15,11 @@
 
 #ifdef AVC_DEVICE
 #include "src/avclan-device.h"
-#endif
-
-#if defined AVC_MASTER || defined AVC_DEVICE
 #include "src/avclan-messages.h"
 #endif
 
 #include "src/avclan-router.h"
 
-
-#define DEFAULT_MSG_DELAY 15
 //#define local_debug
 
 uint8_t readSeq = 0;
@@ -66,7 +57,7 @@ void CheckForMessage() {
         if (!res) {
             last_message_time = millis();
             switch (msg_frame.slave) {
-                /*  If messages sent to HU master  */
+#ifndef AVC_SNIFFER
             case ADDR_ME:        //  Define global_master in config.h              
 #ifdef local_debug
                 avcSerial.println("Received message for ADDR_ME");
@@ -78,6 +69,7 @@ void CheckForMessage() {
                 device.processMessage(&msg_frame);
 #endif
                 break;
+#endif
 
                 /*  If broadcast messages*/
             case ADDR_BROADCAST_1FF:
@@ -170,8 +162,52 @@ void avclan_startup() {
 }
 
 void setup() {
-    avcSerial.begin(57600);
-    avcSerial.println("Start!");
+    avcSerial.begin( 115200 );
+    avcSerial.println( "AVC-Lan Start" );
+#if defined AVC_MASTER
+    avcSerial.println( "Mode: MASTER");
+#elif defined AVC_DEVICE
+    avcSerial.println( "Mode: DEVICE");
+#elif defined AVC_SNIFFER
+    avcSerial.println( "Mode: SNIFFER");
+#else
+    avcSerial.println( "Mode: unknown...");
+    avcSerial.println( "Error: mode not set. Check configuration." );
+    exit( 0 );
+#endif
+#if ( CRYSTAL == 3 )
+    avcSerial.print( "Crystal spec: ");
+    avcSerial.println( "16MHz");
+#elif ( CRYSTAL == 1 )
+    avcSerial.print( "Crystal spec: ");
+    avcSerial.println( "8MHz");
+#else
+    avcSerial.println( "Error: crystal specification not set. Check configuration." );
+    exit( 0 );
+#endif
+    avcSerial.print( "DATAOUT / TX- : ");
+    avcSerial.printDec( DATAOUT );
+    avcSerial.println();
+    avcSerial.print( "DATAIN / TX+ : ");
+    avcSerial.printDec( DATAIN );
+    avcSerial.println();
+    avcSerial.print( "Arduino address : ");
+    avcSerial.printHex16( ADDR_ME );
+    avcSerial.println();
+    avcSerial.print( "AVC_NORMAL_BIT_LENGTH: " );           avcSerial.printDec( AVC_NORMAL_BIT_LENGTH );
+    avcSerial.println();
+    avcSerial.print( "AVC_BIT_1_HOLD_ON_LENGTH: " );        avcSerial.printDec( AVC_BIT_1_HOLD_ON_LENGTH );
+    avcSerial.println();
+    avcSerial.print( "AVC_BIT_0_HOLD_ON_LENGTH: " );        avcSerial.printDec( AVC_BIT_0_HOLD_ON_LENGTH );
+    avcSerial.println();
+    avcSerial.print( "AVC_BIT_0_HOLD_ON_MIN_LENGTH: " );    avcSerial.printDec( AVC_BIT_0_HOLD_ON_MIN_LENGTH );
+    avcSerial.println();
+    avcSerial.print( "AVC_START_BIT_HOLD_ON_LENGTH: " );    avcSerial.printDec( AVC_START_BIT_HOLD_ON_LENGTH );
+    avcSerial.println();
+    avcSerial.print( "AVC_START_BIT_HOLD_ON_MIN_LENGTH: " );avcSerial.printDec( AVC_START_BIT_HOLD_ON_MIN_LENGTH );
+    avcSerial.println();
+    avcSerial.print( "AVC_1U_LENGTH: " );                   avcSerial.printDec( AVC_1U_LENGTH );
+    avcSerial.println();
 
     delay(3000);
     // Setup LED
@@ -320,8 +356,5 @@ ISR(TIMER1_OVF_vect) {
 
     /*  Trigger broadcast of timed interval status request messages for all devices
     */
-
-#ifdef AVC_MASTER
-#endif
 
 }

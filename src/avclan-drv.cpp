@@ -12,7 +12,6 @@
 #ifdef AVC_I2C
 #include "avclan-i2c.h"
 #endif
-//#include <Arduino.h>						          
 #ifdef AVR
 #include <avr/pgmspace.h>
 #include <avr/interrupt.h>
@@ -22,7 +21,7 @@
 #endif
 
 void avclan_drv::begin() {
-	// AVCLan TX+/TX- 	read line INPUT														                                                                                                                           
+	// AVCLan TX+/TX- 	read line INPUT
 	cbi(DATAIN_DDR, DATAIN);
 	cbi(DATAIN_PORT, DATAIN);
 
@@ -44,7 +43,6 @@ void avclan_drv::begin() {
 	TCNT1H = TI1_H; // Load counter value hi
 	TCNT1L = TI1_L;	// Load counter value lo
 	DISABLE_TIMER1_INT;
-	//AZFM_INIT;
 
 }
 
@@ -127,7 +125,10 @@ uint8_t avclan_drv::_readMessage(avclan_frame_t *msg_frame) {
 		return 4;
 	}
 
-	bool forMe = (msg_frame->slave == ADDR_ME);
+	bool forMe = false;
+#ifndef AVC_SNIFFER	
+	forMe = (msg_frame->slave == ADDR_ME);
+#endif
 
 	if (forMe) {
 		// Send ACK.
@@ -460,7 +461,7 @@ uint8_t avclan_drv::_sendMessage(avclan_frame_t *msg_frame) {
 // sends the message in global registers on the AVC LAN bus, log message through serial port
 // return 0 if successful else error code
 uint8_t avclan_drv::sendMessage(avclan_frame_t* msg_frame, bool print) {
-	uint8_t sc = MAXSENDATTEMP;
+	uint8_t sc = MAXSENDATTEMPT;
 	uint8_t res;
 
 	do {
@@ -507,9 +508,7 @@ uint8_t avclan_drv::sendMessage(const avclan_frame_t msg, bool print) {
 
 // print message to serial port
 void avclan_drv::printMessage(avclan_frame_t* msg_frame, uint8_t incoming) {
-#ifdef AVC_I2C
-		sendMessageToI2C(msg_frame);
-#endif
+
 	switch (incoming) {
 	case 0:
 		avcSerial.print("> ");

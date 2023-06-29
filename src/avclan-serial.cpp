@@ -61,6 +61,16 @@ void avclan_serial::printHex8(uint8_t data) {
 	}
 }
 
+// https://techoverflow.net/2021/12/03/how-to-print-16-bit-uint16_t-as-four-hex-digits-in-arduino/
+void avclan_serial::printHex16( uint16_t data ){
+	// https://forum.arduino.cc/t/class-hardwareserial-has-no-member-named-sprintf/378963/3
+	char buffer [ sizeof(uint16_t) ]; // must be large enough for your whole string!
+	sprintf (buffer, "%04X", data ); // __builtin_bswap16( data )
+	//buffer [ sizeof(uint16_t) ] = '\0';
+	Serial.print( "0x" );
+	Serial.print( buffer );
+}
+
 void avclan_serial::printDec(uint8_t data) {
 	Serial.print(data, DEC);
 }
@@ -74,7 +84,6 @@ bool avclan_serial::available(void) {
 uint8_t avclan_serial::read(void) {
 	return Serial.read();
 }
-
 
 void avclan_serial::printHex8(uint8_t* data, uint8_t length) // prints 8-bit data in hex
 {
